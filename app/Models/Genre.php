@@ -9,6 +9,8 @@ class Genre extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name'];
+
     public function genres() {
         return $this->belongsToMany("App\Models\Genre");
     }
