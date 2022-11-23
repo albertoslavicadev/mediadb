@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ActorController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +24,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('films', 'FilmController');
+Route::resource('actors', 'ActorController');
+
+
+

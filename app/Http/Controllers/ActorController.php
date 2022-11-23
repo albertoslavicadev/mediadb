@@ -14,14 +14,14 @@ class ActorController extends Controller
      */
     public function index()
     {
-        $actor = Actor::all();
+        $actors = Actor::all();
         return view('actors.list')->with('actors', $actors);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function create()
     {
@@ -32,7 +32,7 @@ class ActorController extends Controller
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
