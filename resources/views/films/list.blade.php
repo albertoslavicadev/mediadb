@@ -7,14 +7,11 @@
         <table class="table actor">
             <thead>
             <th>Name</th>
-
             <th>Nome Originale</th>
-
             <th>Attori Protagonisti</th>
             <th>Generi</th>
             <th>Tags</th>
             <th>Voto</th>
-
             </thead>
             <tbody>
             @foreach($films as $film)

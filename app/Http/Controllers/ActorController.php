@@ -34,7 +34,7 @@ class ActorController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): \Illuminate\Http\RedirectResponse
     {
         $request->validate(['name' => 'required']);
         Actor::create(['name' => $request->name]);
@@ -78,11 +78,15 @@ class ActorController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
-     * @return \Illuminate\Http\Response
+     * @param Actor $actor
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
+    public function destroy(Actor $actor)
     {
-        //
+        $actor->delete();
+        return redirect()->route('actors.index')->with('success', 'Actor deleted successfully!');
+    }
+    public function __construct()	{
+        $this->middleware('auth');
     }
 }

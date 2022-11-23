@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Film;
 use Illuminate\Http\Request;
-use AppRating;
 use Illuminate\Support\Facades\Auth;
 use willvincent\Rateable\Rating;
 
@@ -41,8 +40,8 @@ class FilmController extends Controller
     public function store(Request $request)
     {
         $request->validate(['name_it' => 'required', 'name_eng' => 'required', 'release_date' => 'required', 'trailer' => 'required']);
-        Film::create(['name' => $request->name]);
-        return redirect()->route('films.index');
+        Film::create(['name_it' => $request->name_it, 'name_eng' => $request->name_eng,  ]);
+        return redirect()->route("/");
     }
 
     /**
