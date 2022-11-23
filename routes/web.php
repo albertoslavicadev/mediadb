@@ -26,5 +26,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('films', 'FilmController');
 Route::resource('actors', 'ActorController');
 
+Route::post('/films/{id}', 'FilmController@star')->name('star');
 
 

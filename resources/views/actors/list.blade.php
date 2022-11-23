@@ -3,23 +3,29 @@
 
 @section('content')
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('Dashboard') }}</div>
+        <h1 class="text-center">Lista Attori</h1>
+    <table class="table actor">
+        <thead>
+        <th>Name</th>
 
-                    <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
-                            </div>
-                        @endif
-                        <div id="indextest"></div>
-                        {{ __('You are logged in!') }}
-                    </div>
-                </div>
-            </div>
-        </div>
+        <th></th>
+
+        </thead>
+        <tbody>
+        @foreach ($actors as $actor)
+            <tr>
+                <td class="">{{ $actor->name }}</td>
+                <td class="buttons">
+                    <form class="buttons-form" action="{{ route('actors.edit', $actor) }}" method="POST"> @csrf @method('GET') <button
+                            type="submit" class="btn btn-primary">Edit</button> </form>
+
+                <form class="buttons-form" action="{{ route('actors.destroy', $actor) }}" method="POST"> @csrf @method('DELETE') <button
+                        type="submit" class="btn btn-danger">Delete</button></form>
+                </form>
+                </td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
     </div>
 @endsection
-

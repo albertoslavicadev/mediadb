@@ -36,7 +36,7 @@ class ActorController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(['name000' => 'required']);
+        $request->validate(['name' => 'required']);
         Actor::create(['name' => $request->name]);
         return redirect()->route('actors.index');
     }
