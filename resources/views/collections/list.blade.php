@@ -20,6 +20,14 @@
                         {{ $film->name_eng }}
                     @endforeach
                 </td>
+                <td>
+                <form class="buttons-form" action="{{ route('collections.edit', $collection) }}" method="POST"> @csrf @method('GET') <button
+                        type="submit" class="btn btn-primary">Edit</button> </form>
+                <form class="buttons-form" action="{{ route('collections.show', $collection) }}" method="POST"> @csrf @method('GET') <button
+                        type="submit" class="btn btn-primary">Show</button> </form>
+                <form class="buttons-form" action="{{ route('collections.destroy', $collection) }}" method="POST"> @csrf @method('DELETE') <button
+                        type="submit" class="btn btn-danger">Delete</button> </form>
+                </td>
             @endforeach
             </tbody>
         </table>
