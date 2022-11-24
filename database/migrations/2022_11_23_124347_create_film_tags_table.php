@@ -13,7 +13,7 @@ class CreateFilmTagsTable extends Migration
      */
     public function up()
     {
-        Schema::create('film_tags', function (Blueprint $table) {
+        Schema::create('film_tag', function (Blueprint $table) {
             $table->id();
             $table->foreignId("film_id")->constrained();
             $table->foreignId("tag_id")->constrained();

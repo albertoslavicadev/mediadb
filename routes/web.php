@@ -20,10 +20,11 @@ use App\Http\Controllers\FilmController;
 
 Auth::routes();
 
-Route::get('/', [App\Http\Controllers\FilmController::class, 'index'])->name('film');
+Route::get('/', [App\Http\Controllers\CollectionController::class, 'index'])->name('collection');
 
 Route::resource('films', 'FilmController');
 Route::resource('actors', 'ActorController');
+Route::resource('collections', 'CollectionController');
 
 Route::post('/films/{id}', 'FilmController@star')->name('star');
 

@@ -38,6 +38,7 @@
                                     <label class="star star-2" for="star-2"></label>
                                     <input class="star star-1" value="1" id="star-1" type="radio" name="star"/>
                                     <label class="star star-1" for="star-1"></label>
+
                                 </div>
                             </div>
                         </form>
@@ -53,6 +54,7 @@
 <style>
     div.stars {
         display: inline-block;
+        float: right;
     }
 
     input.star { display: none; }
@@ -66,7 +68,7 @@
     }
 
     input.star:checked ~ label.star:before {
-        content: 'f005';
+        content: '\f006';
         color: #e74c3c;
         transition: all .25s;
     }
@@ -81,13 +83,14 @@
     label.star:hover { transform: rotate(-15deg) scale(1.3); }
 
     label.star:before {
-        content: 'f006';
+        content: '\f006';
         font-family: FontAwesome;
+
     }
 
 
     .horline > li:not(:last-child):after {
-        content: " |";
+        content: "f006";
     }
     .horline > li {
         font-weight: bold;

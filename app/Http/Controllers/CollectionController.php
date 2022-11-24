@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Collection;
+use App\Models\Film;
 use Illuminate\Http\Request;
 
 class CollectionController extends Controller
@@ -14,7 +15,8 @@ class CollectionController extends Controller
      */
     public function index()
     {
-        //
+        $collections = Collection::all();
+        return view('collections.list')->with(compact($collections));
     }
 
     /**

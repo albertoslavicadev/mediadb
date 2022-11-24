@@ -52,8 +52,12 @@ class FilmController extends Controller
             'release_date' => 'required',
             'trailer' => 'required'
         ]);
-        Film::create(['name_it' => $request->name_it, 'name_eng' => $request->name_eng, 'release_date' => $request->release_date,  ]);
-        return redirect()->route("/");
+        $film = Film::create(['name_it' => $request->name_it, 'name_eng' => $request->name_eng, 'release_date' => $request->release_date]);
+        $actor = $film->actors()->attach(1);
+        $genre = $film->genres()->attach(1);
+        $tag = $film->tags()->attach(1);
+        return redirect()->route("films.index");
+
     }
 
     /**
