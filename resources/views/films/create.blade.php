@@ -6,14 +6,34 @@
             <input class="form-control mt-2" type="text" name="name_it" placeholder="Nome in italiano">
             <input class="form-control mt-2" type="text" name="name_eng" placeholder="Nome originale">
             <input class="form-control mt-2" type="date" name="name_it" placeholder="Data di rilascio">
-            @foreach($films as $film)
-                <select class="form-control mt-2" name="{{$film->actor->name}}" id="">
+            <label class="mt-2" for="actor[]">Seleziona gli attori presenti (max 5)</label>
+            <select class="form-control" multiple="multiple" name="actor[]" id="">
+                @foreach($actors as $actor)
+                    <option value="{{$actor->name}}">{{$actor->name}}</option>
 
-                    <option value="{{$films->actor->name}}"></option>
 
-                </select>
-            @endforeach
-            <button type="submit">Submit</button>
+                @endforeach
+            </select>
+            <label class="mt-2" for="genre[]">Seleziona i generi del film (max 3)</label>
+            <select class="form-control" multiple="multiple" name="genre[]" id="">
+                @foreach($genres as $genre)
+                    <option value="{{$genre->name}}">{{$genre->name}}</option>
+
+
+                @endforeach
+            </select>
+            <label class="mt-2" for="tag[]">Seleziona i tag (max 10)</label>
+            <select class="form-control" multiple="multiple" name="tag[]" id="">
+                @foreach($tags as $tag)
+                    <option value="{{$tag->name}}">{{$tag->name}}</option>
+
+
+                @endforeach
+            </select>
+            <input class="form-control mt-2"  type="date">
+
+
+            <button type="submit" class="btn btn-primary align-items-center mt-3">Submit</button>
         </form>
     </div>
 @endsection

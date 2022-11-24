@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Actor;
 use App\Models\Film;
+use App\Models\Genre;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use willvincent\Rateable\Rating;
@@ -28,7 +31,11 @@ class FilmController extends Controller
      */
     public function create()
     {
-        return view('films.create');
+        $genres = Genre::all();
+        $tags = Tag::all();
+        $actors = Actor::all();
+        return view('films.create')->with('actors', $actors)->with('tags', $tags)->with('genres', $genres);
+        // Fare il compact per eliminare il resto
     }
 
     /**
@@ -39,8 +46,13 @@ class FilmController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(['name_it' => 'required', 'name_eng' => 'required', 'release_date' => 'required', 'trailer' => 'required']);
-        Film::create(['name_it' => $request->name_it, 'name_eng' => $request->name_eng,  ]);
+        $request->validate([
+            'name_it' => 'required',
+            'name_eng' => 'required',
+            'release_date' => 'required',
+            'trailer' => 'required'
+        ]);
+        Film::create(['name_it' => $request->name_it, 'name_eng' => $request->name_eng, 'release_date' => $request->release_date,  ]);
         return redirect()->route("/");
     }
 

@@ -26,7 +26,7 @@ class Rating extends Model
     }
 
 
-    public function post()
+    public function films()
     {
         return $this->belongsTo(Film::class);
     }
