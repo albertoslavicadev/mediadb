@@ -8,7 +8,7 @@
 
             <button type="submit" class="btn btn-primary align-items-center mt-3">Submit</button>
         </form>
-        @else <h1>You can't access this function</h1>
+        
     </div>
 @endsection
 

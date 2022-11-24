@@ -24,4 +24,7 @@ class Film extends Model
     public function rating() {
         return $this->hasMany(Rating::class);
     }
+    public function collections() {
+        return $this->belongsToMany("App\Models\Collection");
+    }
 }

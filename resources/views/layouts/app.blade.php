@@ -37,9 +37,9 @@
                 <ul class="navbar-nav me-auto">
                     @can('upload collection')
                         <li class="nav-item"><a class="nav-link" href="/films/create/">Upload Films</a></li>
-                        <li class="nav-item"><a class=" nav-link" href="">View Films</a></li>
-                        <li class="nav-item"><a class=" nav-link" href="/films`/create/">Upload Actors</a></li>
-                        <li class="nav-item"><a class=" nav-link" href="">View Actors</a></li>
+                        <li class="nav-item"><a class=" nav-link" href="/films/">View Films</a></li>
+                        <li class="nav-item"><a class=" nav-link" href="/actors/create/">Upload Actors</a></li>
+                        <li class="nav-item"><a class=" nav-link" href="/actors/">View Actors</a></li>
                     @endcan
                         <li class="nav-item"><a class="nav-link" href="">Create Collection</a></li>
 
