@@ -7,14 +7,20 @@
         <table class="table actor">
             <thead>
             <th>Collezione</th>
-            <th></th>
-            <th>Attori Protagonisti</th>
-            <th>Generi</th>
-            <th>Tags</th>
+            <th>Films</th>
             <th>Voto</th>
             </thead>
             <tbody>
-
+            @foreach($collections as $collection)
+                <td>
+                    {{$collection->name}}
+                </td>
+                <td>
+                    @foreach($collection->films as $film)
+                        {{ $film->name_eng }}
+                    @endforeach
+                </td>
+            @endforeach
             </tbody>
         </table>
     </div>
@@ -26,7 +32,9 @@
         display: inline-block;
     }
 
-    input.star { display: none; }
+    input.star {
+        display: none;
+    }
 
     label.star {
         float: right;
@@ -47,9 +55,13 @@
         text-shadow: 0 0 5px #7f8c8d;
     }
 
-    input.star-1:checked ~ label.star:before { color: #F62; }
+    input.star-1:checked ~ label.star:before {
+        color: #F62;
+    }
 
-    label.star:hover { transform: rotate(-15deg) scale(1.3); }
+    label.star:hover {
+        transform: rotate(-15deg) scale(1.3);
+    }
 
     label.star:before {
         content: 'f006';
@@ -61,6 +73,7 @@
     .horline > li:not(:last-child):after {
         content: " |";
     }
+
     .horline > li {
         font-weight: bold;
         color: #ff7e1a;
@@ -69,7 +82,7 @@
 </style>
 
 <script>
-    $('#addStar').change('.star', function(e) {
+    $('#addStar').change('.star', function (e) {
         $(this).submit();
     });
 </script>

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Actor;
 use App\Models\Collection;
 use App\Models\Film;
+use App\Models\Genre;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class CollectionController extends Controller
@@ -11,77 +14,106 @@ class CollectionController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function index()
     {
+        $films = Film::all();
+        $genres = Genre::all();
+        $tags = Tag::all();
+        $actors = Actor::all();
         $collections = Collection::all();
-        return view('collections.list')->with(compact($collections));
+        return view('collections.list', compact('collections',
+            'films', 'genres', 'tags', 'actors'));
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        $films = Film::all();
+        $collections = Collection::all();
+        return view('collections.create', compact('collections', 'films'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required'
+
+        ]);
+        $collection = Collection::create(['name' => $request->name]);
+        $film = $collection->films()->attach($request->input('film[]'));
+        return redirect()->route("collections.index");
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Collection  $collection
-     * @return \Illuminate\Http\Response
+     * @param \App\Models\Collection $collection
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function show(Collection $collection)
     {
-        //
+        return view('collections.show')->with('collection', $collection);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Collection  $collection
-     * @return \Illuminate\Http\Response
+     * @param \App\Models\Collection $collection
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function edit(Collection $collection)
     {
-        //
+        $film = Genre::all();
+        return view('collections.edit')->with('film', $film);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Collection  $collection
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Collection $collection
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
      */
     public function update(Request $request, Collection $collection)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+        ]);
+        $collection->update(['name' => $request->name]);
+        $film = $collection->films()->sync($request->input('film[]'));
+        return redirect('/') ->with('success', 'Collection updated successfully!');
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Collection  $collection
-     * @return \Illuminate\Http\Response
+     * @param \App\Models\Collection $collection
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Collection $collection)
     {
-        //
+        $collection->films()->detach();
+        $collection->delete();
+        return redirect()->route('films.index')->with('success', 'Film eliminato con successo.');
     }
+
+    public function __construct()	{
+        $this->middleware('auth');
+    }
+
 }
+
+

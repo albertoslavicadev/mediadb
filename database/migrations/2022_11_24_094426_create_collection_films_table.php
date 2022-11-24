@@ -13,8 +13,10 @@ class CreateCollectionFilmsTable extends Migration
      */
     public function up()
     {
-        Schema::create('collection_films', function (Blueprint $table) {
+        Schema::create('collection_film', function (Blueprint $table) {
             $table->id();
+            $table->foreignId("collection_id")->constrained();
+            $table->foreignId("film_id")->constrained();
             $table->timestamps();
         });
     }

@@ -9,6 +9,8 @@ class Collection extends Model
 {
     use HasFactory;
 
+    public $fillable = ['name'];
+
     public function films() {
         return $this->belongsToMany("App\Models\Film");
     }

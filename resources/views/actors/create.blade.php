@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app') @include('alerts') @include('errors')
 @section('content')
     <div class="container">
         <form action="{{ route('actors.store') }}" method="POST">
@@ -8,7 +8,7 @@
 
             <button type="submit" class="btn btn-primary align-items-center mt-3">Submit</button>
         </form>
-        
+
     </div>
 @endsection
 

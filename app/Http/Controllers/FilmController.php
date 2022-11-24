@@ -21,7 +21,10 @@ class FilmController extends Controller
     public function index()
     {
         $films = Film::all();
-        return view('films.list')->with('films', $films);
+        $genres = Genre::all();
+        $tags = Tag::all();
+        $actors = Actor::all();
+        return view('films.list')->with('films', $films)->with('actors', $actors)->with('tags', $tags)->with('genres', $genres);
     }
 
     /**
@@ -53,9 +56,9 @@ class FilmController extends Controller
             'trailer' => 'required'
         ]);
         $film = Film::create(['name_it' => $request->name_it, 'name_eng' => $request->name_eng, 'release_date' => $request->release_date]);
-        $actor = $film->actors()->attach(1);
-        $genre = $film->genres()->attach(1);
-        $tag = $film->tags()->attach(1);
+        $actor = $film->actors()->attach($request->input('actor[]'));
+        $genre = $film->genres()->attach($request->input('genre[]'));
+        $tag = $film->tags()->attach($request->input('tag[]'));
         return redirect()->route("films.index");
 
     }
@@ -75,11 +78,14 @@ class FilmController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param \App\Models\Film $film
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function edit(Film $film)
     {
-        //
+        $genres = Genre::all();
+        $tags = Tag::all();
+        $actors = Actor::all();
+        return view('films.edit')->with('film', $film)->with('actors', $actors)->with('tags', $tags)->with('genres', $genres);
     }
 
     /**
@@ -87,25 +93,41 @@ class FilmController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param \App\Models\Film $film
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
      */
     public function update(Request $request, Film $film)
     {
-        //
+        $request->validate([
+            'name_it' => 'required',
+            'name_eng' => 'required',
+            'release_date' => 'required',
+            'trailer' => 'required'
+        ]);
+        $film->update(['name_it' => $request->name_it, 'name_eng' => $request->name_eng, 'release_date' => $request->release_date]);
+        $actor = $film->actors()->sync($request->input('actor[]'));
+        $genre = $film->genres()->sync($request->input('genre[]'));
+        $tag = $film->tags()->sync($request->input('tag[]'));
+        return redirect('/films') ->with('success', 'Film updated successfully!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param \App\Models\Film $film
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Film $film)
     {
-        //
+        $film->actors()->detach();
+        $film->genres()->detach();
+        $film->tags()->detach();
+        $film->delete();
+        return redirect()->route('films.index')->with('success', 'Film eliminato con successo.');
+
     }
 
-    public function star (Request $request, Film $films) {
+    public function star(Request $request, Film $films)
+    {
         $rating = new Rating;
         $rating->user_id = Auth::id();
         $rating->rating = $request->input('star');

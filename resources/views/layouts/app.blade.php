@@ -42,7 +42,7 @@
                         <li class="nav-item"><a class=" nav-link" href="/actors/create/">Upload Actors</a></li>
                         <li class="nav-item"><a class=" nav-link" href="/actors/">View Actors</a></li>
                     @endcan
-                        <li class="nav-item"><a class="nav-link" href="">Create Collection</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/collections/create">Create Collection</a></li>
 
                 </ul>
 
