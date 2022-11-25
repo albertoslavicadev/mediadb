@@ -12,22 +12,43 @@
             </thead>
             <tbody>
             @foreach($collections as $collection)
-                <td>
-                    {{$collection->name}}
-                </td>
-                <td>
-                    @foreach($collection->films as $film)
-                        {{ $film->name_eng }}
-                    @endforeach
-                </td>
-                <td>
-                <form class="buttons-form" action="{{ route('collections.edit', $collection) }}" method="POST"> @csrf @method('GET') <button
-                        type="submit" class="btn btn-primary">Edit</button> </form>
-                <form class="buttons-form" action="{{ route('collections.show', $collection) }}" method="POST"> @csrf @method('GET') <button
-                        type="submit" class="btn btn-primary">Show</button> </form>
-                <form class="buttons-form" action="{{ route('collections.destroy', $collection) }}" method="POST"> @csrf @method('DELETE') <button
-                        type="submit" class="btn btn-danger">Delete</button> </form>
-                </td>
+                <tr>
+                    <td>
+                        <li>{{$collection->name}}</li>
+                    </td>
+                    <td>
+
+                        @foreach($collection->films as $film)
+                            <li>{{ $film->name_eng }}</li>
+                        @endforeach
+                    </td>
+
+                    <td>
+                        <form class="buttons-form float-end" action="{{ route('collections.show', $collection) }}"
+                              method="POST"> @csrf @method('GET')
+                            <button
+                                type="submit" class="btn btn-primary">Show
+                            </button>
+                        </form>
+                    </td>
+                    <td>
+                        <form class="buttons-form float-end" action="{{ route('collections.edit', $collection) }}"
+                              method="POST"> @csrf @method('GET')
+                            <button
+                                type="submit" class="btn btn-primary">Edit
+                            </button>
+                        </form>
+                    </td>
+                    <td>
+                        <form class="buttons-form" action="{{ route('collections.destroy', $collection) }}"
+                              method="POST"> @csrf @method('DELETE')
+                            <button
+                                type="submit" class="btn btn-danger">Delete
+                            </button>
+                        </form>
+                    </td>
+                    </td>
+                </tr>
             @endforeach
             </tbody>
         </table>

@@ -10,6 +10,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
@@ -21,6 +22,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
 </head>
 <body>
+
 <div id="app">
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
@@ -43,7 +45,12 @@
                         <li class="nav-item"><a class=" nav-link" href="/actors/">View Actors</a></li>
                     @endcan
                         <li class="nav-item"><a class="nav-link" href="/collections/create">Create Collection</a></li>
-
+                    <li><div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search...">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button">Go</button>
+                            </div>
+                        </div></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->

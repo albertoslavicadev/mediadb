@@ -52,7 +52,7 @@ class CollectionController extends Controller
 
         ]);
         $collection = Collection::create(['name' => $request->name]);
-        $film = $collection->films()->attach($request->input('film[]'));
+        $film = $collection->films()->sync($request->input('film'));
         return redirect()->route("collections.index");
     }
 
@@ -107,11 +107,52 @@ class CollectionController extends Controller
     {
         $collection->films()->detach();
         $collection->delete();
-        return redirect()->route('films.index')->with('success', 'Film eliminato con successo.');
+        return redirect('/') ->with('success', 'Collection deleted successfully!');
     }
 
     public function __construct()	{
         $this->middleware('auth');
+    }
+
+    public function createReview(Request $request)
+    {
+        $collection_id = (int) $request->get('collection');
+        $vote = (int) $request->get('vote');
+        $review = new Review([
+            'vote' => $vote,
+            'collection_id' => $collection_id
+        ]);
+        $review->save();
+
+        return response()->json(['saved' => true]);
+    }
+    public function single($slug)
+    {
+        $collection = Collection::where('slug', $slug)->first();
+
+        if(is_null($collection)) {
+            return redirect()->route('home');
+        }
+
+        $reviews = $collection->reviews;
+        $total_reviews = count($reviews);
+        $average = 0;
+
+        if($total_reviews > 0) {
+            $total_vote = 0;
+            foreach($reviews as $review) {
+                $total_vote += $review->vote;
+            }
+
+            $average = floor($total_vote / $total_reviews );
+        }
+
+        return view('single',[
+            'title' => $collection->title . ' | E-commerce',
+            'product' => $collection,
+            'total_reviews' => $total_reviews,
+            'average' => $average
+        ]);
     }
 
 }

@@ -14,4 +14,14 @@ class Collection extends Model
     public function films() {
         return $this->belongsToMany("App\Models\Film");
     }
+
+    public function reviews()
+    {
+        return $this->hasMany('App\Review');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany('App\Comment');
+    }
 }

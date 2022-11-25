@@ -55,10 +55,11 @@ class FilmController extends Controller
             'release_date' => 'required',
             'trailer' => 'required'
         ]);
-        $film = Film::create(['name_it' => $request->name_it, 'name_eng' => $request->name_eng, 'release_date' => $request->release_date]);
-        $actor = $film->actors()->attach($request->input('actor[]'));
-        $genre = $film->genres()->attach($request->input('genre[]'));
-        $tag = $film->tags()->attach($request->input('tag[]'));
+        $film = Film::create(['name_it' => $request->name_it, 'name_eng' => $request->name_eng, 'release_date' => $request->release_date, 'trailer' => $request->trailer]);
+//        dd($request->input('actor'));
+        $film->actors()->sync($request->input('actor'));
+        $film->genres()->sync($request->input('genre'));
+        $film->tags()->sync($request->input('tag'));
         return redirect()->route("films.index");
 
     }
@@ -69,9 +70,9 @@ class FilmController extends Controller
      * @param \App\Models\Film $film
      * @return \Illuminate\Http\Response
      */
-    public function show(Film $film)
+    public function show($id)
     {
-        //
+        return Tmdb::getMoviesApi()->getMovie($id);
     }
 
     /**
@@ -126,12 +127,11 @@ class FilmController extends Controller
 
     }
 
-    public function star(Request $request, Film $films)
+    public function formSubmit(Request $request)
+
     {
-        $rating = new Rating;
-        $rating->user_id = Auth::id();
-        $rating->rating = $request->input('star');
-        $films->ratings()->save($rating);
-        return redirect()->back();
+
+        return response()->json([$request->all()]);
+
     }
 }

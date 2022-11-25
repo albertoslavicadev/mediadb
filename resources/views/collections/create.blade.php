@@ -7,7 +7,7 @@
             <label for=""></label>
             <select class="form-control mt-2" multiple="multiple" name="film[]" id="">
                 @foreach($films as $film)
-                    <option value="{{$film->name_eng}}">{{$film->name_eng}}</option>
+                    <option value="{{$film->id}}">{{$film->name_eng}}</option>
                 @endforeach
             </select>
             <button type="submit" class="btn btn-primary align-items-center mt-3">Publica la tua collezione</button>

@@ -16,7 +16,8 @@ class Actor extends Model
         'name',
     ];
 
-    public function films() {
+    public function films(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
         return $this->belongsToMany("App\Models\Film");
     }
 }

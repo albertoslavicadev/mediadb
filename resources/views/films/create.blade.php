@@ -13,19 +13,19 @@
             <label class="mt-2" for="actor[]">Seleziona gli attori presenti (max 5)</label>
             <select class="form-control mt-2" multiple="multiple" name="actor[]" id="">
                 @foreach($actors as $actor)
-                    <option value="{{$actor->name}}">{{$actor->name}}</option>
+                    <option value="{{$actor->id}}">{{$actor->name}}</option>
                 @endforeach
             </select>
             <label class="mt-2" for="genre[]">Seleziona i generi del film (max 3)</label>
             <select class="form-control mt-2" multiple="multiple" name="genre[]" id="">
                 @foreach($genres as $genre)
-                    <option value="{{$genre->name}}">{{$genre->name}}</option>
+                    <option value="{{$genre->id}}">{{$genre->name}}</option>
                 @endforeach
             </select>
             <label class="mt-2" for="tag[]">Seleziona i tag (max 10)</label>
             <select class="form-control mt-2" multiple="multiple" name="tag[]" id="">
                 @foreach($tags as $tag)
-                    <option value="{{$tag->name}}">{{$tag->name}}</option>
+                    <option value="{{$tag->id}}">{{$tag->name}}</option>
                 @endforeach
             </select>
             <label class=" mt-2" for="trailer">Inserisci il link del trailer</label>
