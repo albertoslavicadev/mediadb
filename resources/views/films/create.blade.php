@@ -1,5 +1,6 @@
 @extends('layouts.app') @include('alerts') @include('errors')
 @section('content')
+
     <div class="container">
         <form action="{{ route('films.store') }}" method="POST">
             @csrf

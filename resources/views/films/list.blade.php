@@ -45,7 +45,7 @@
                         </ul>
                     </td>
 
-                    <td class="">{{ $film->trailer }}</td>
+                    <td class=""><a href="{{ $film->trailer }}">Trailer</a></td>
                     @can('upload collection')
                         <td class="">
                             <form data-inline="true" action="{{ route('films.edit', $film) }}"
@@ -71,6 +71,3 @@
         </table>
     </div>
 @endsection
-
-
-

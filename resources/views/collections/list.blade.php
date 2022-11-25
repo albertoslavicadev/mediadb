@@ -31,14 +31,7 @@
                             </button>
                         </form>
                     </td>
-                    <td>
-                        <form class="buttons-form float-end" action="{{ route('collections.edit', $collection) }}"
-                              method="POST"> @csrf @method('GET')
-                            <button
-                                type="submit" class="btn btn-primary">Edit
-                            </button>
-                        </form>
-                    </td>
+                    @can('upload collection')
                     <td>
                         <form class="buttons-form" action="{{ route('collections.destroy', $collection) }}"
                               method="POST"> @csrf @method('DELETE')
@@ -48,6 +41,7 @@
                         </form>
                     </td>
                     </td>
+                    @endcan
                 </tr>
             @endforeach
             </tbody>

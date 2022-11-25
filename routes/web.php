@@ -26,6 +26,7 @@ Route::get('/', [App\Http\Controllers\CollectionController::class, 'index'])->na
 Route::resource('films', 'FilmController');
 Route::resource('actors', 'ActorController');
 Route::resource('collections', 'CollectionController');
+Route::resource('collection', 'CommentController');
 
 Route::post('/films/{id}', 'FilmController@star')->name('star');
 

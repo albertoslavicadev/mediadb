@@ -15,6 +15,6 @@ class Comment extends Model
 
     public function collections()
     {
-        return $this->belongsTo('App\Collection');
+        return $this->belongsTo(Collection::class);
     }
 }

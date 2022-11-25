@@ -11,10 +11,7 @@
         </thead>
         <tbody>
         <tr>
-
             <td>{{ $collection->name }}</td>
-
-
             @foreach($collection->films as $film)
                 <td>
                     <h6 class="">{{ $film->name_eng }}</h6>
@@ -47,11 +44,11 @@
             </tr>
         </tbody>
     </table>
-    <div class="comments">
+{{--    <div class="comments">--}}
 {{--        @foreach($collection->comments as $comment)--}}
-{{--            --}}
+{{--            {{$comment->content}}--}}
 {{--        @endforeach--}}
-    </div>
-</div>+
+{{--    </div>--}}
+</div>
 @endsection
 
