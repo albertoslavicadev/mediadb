@@ -35,3 +35,19 @@
     </div>
 @endsection
 
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+<script type="javascript">
+    $$(function() {
+        var $width = $('#width');
+
+        $('.actor').change(function() {
+            var $selected = $(this).find('option:selected');
+            $width.prop({
+                min: $selected.data('1'),
+                max: $selected.data('5')
+            });
+        });
+    });
+
+</script>
+

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Actor;
 use App\Models\Collection;
 use App\Models\Film;
 use App\Models\Genre;
 use App\Models\Tag;
+
 use Illuminate\Http\Request;
 
 class CollectionController extends Controller
@@ -64,7 +66,8 @@ class CollectionController extends Controller
      */
     public function show(Collection $collection)
     {
-        return view('collections.show')->with('collection', $collection);
+
+        return view('collections.show', compact('collection'));
     }
 
     /**
@@ -153,6 +156,22 @@ class CollectionController extends Controller
             'total_reviews' => $total_reviews,
             'average' => $average
         ]);
+    }
+
+    public function createComments()
+    {
+        $comments = Comment::all();
+        return view('collections.create', compact( 'comments'));
+    }
+
+    public function storeComment(Request $request)
+    {
+        $request->validate([
+            'name' => 'required'
+
+        ]);
+        $comments = Comment::create(['name' => $request->name]);
+        return view('collections.create', compact( 'comments'));
     }
 
 }

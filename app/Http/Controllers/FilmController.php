@@ -68,11 +68,11 @@ class FilmController extends Controller
      * Display the specified resource.
      *
      * @param \App\Models\Film $film
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Film $film)
     {
-        return Tmdb::getMoviesApi()->getMovie($id);
+        return view('films.show', compact('film'));
     }
 
     /**
@@ -127,11 +127,18 @@ class FilmController extends Controller
 
     }
 
-    public function formSubmit(Request $request)
+    public function search(Request $request){
+        // Get the search value from the request
+        $search = $request->input('search');
 
-    {
+        // Search in the title and body columns from the posts table
+        $films = Film::query()
+            ->where('name_eng', 'LIKE', "%{$search}%")
+            ->get();
 
-        return response()->json([$request->all()]);
-
+        return view('search', compact('films'));
     }
+
+
+
 }

@@ -37,21 +37,24 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
-                <ul class="navbar-nav me-auto">
+                <ul class="navbar-nav mt-5">
                     @can('upload collection')
                         <li class="nav-item"><a class="nav-link" href="/films/create/">Upload Films</a></li>
                         <li class="nav-item"><a class=" nav-link" href="/films/">View Films</a></li>
                         <li class="nav-item"><a class=" nav-link" href="/actors/create/">Upload Actors</a></li>
                         <li class="nav-item"><a class=" nav-link" href="/actors/">View Actors</a></li>
                     @endcan
-                        <li class="nav-item"><a class="nav-link" href="/collections/create">Create Collection</a></li>
-                    <li><div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search...">
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="button">Go</button>
-                            </div>
-                        </div></li>
+                    <li class="nav-item"><a class="nav-link" href="/collections/create">Create Collection</a></li>
+
+                    <li class="nav-item">
+                        <form class="form-inline" action="{{ route('search') }}" method="GET">
+                            <input class="form-control" name="search" type="search" placeholder="Search"
+                                   aria-label="Search">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        </form>
+                    </li>
                 </ul>
+
 
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ms-auto">
