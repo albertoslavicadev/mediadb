@@ -47,6 +47,11 @@
             </tr>
         </tbody>
     </table>
-</div>
+    <div class="comments">
+{{--        @foreach($collection->comments as $comment)--}}
+{{--            --}}
+{{--        @endforeach--}}
+    </div>
+</div>+
 @endsection
 

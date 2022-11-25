@@ -32,3 +32,6 @@ Route::post('/films/{id}', 'FilmController@star')->name('star');
 Route::get('/search', 'FilmController@search')->name('search');
 
 
+
+
+
